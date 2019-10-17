@@ -1,0 +1,1 @@
+ javaapp ansible_host=172.31.44.24 ansible_user=ec2-user

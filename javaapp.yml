@@ -1,0 +1,16 @@
+- hosts: javaapp
+  become: True
+  tasks: 
+        - name: install java
+          yum:
+                  name: java
+                  state: present
+        - name: set docker network
+          docker_network:
+                  name: webapp
+        - name: 
+          docker_container:
+                  name: javaapp
+                  image: 98ashish/java-app
+                  networks:
+                          - name: webapp
