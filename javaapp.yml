@@ -8,6 +8,7 @@
         - name: set docker network
           docker_network:
                   name: webapp
+                  state: present
         - name: 
           docker_container:
                   name: javaapp
