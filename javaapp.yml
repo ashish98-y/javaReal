@@ -11,6 +11,6 @@
         - name: 
           docker_container:
                   name: javaapp
-                  image: 98ashish/java-app
+                  image: 98ashish/java-app:1.0
                   networks:
                           - name: webapp
