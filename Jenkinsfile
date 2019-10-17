@@ -1,6 +1,8 @@
 pipeline{
     agent any
-    def mvn = tool (name: 'maven-3', type: 'maven') + '/bin/mvn'
+    environment{
+         MVN = tool (name: 'maven-3', type: 'maven') + '/bin/mvn'
+    }
     stages{
         stage("checkout"){
             steps{
@@ -9,7 +11,7 @@ pipeline{
         }
         stage("build mvn"){
             steps{
-                sh "${mvn} clean package"
+                sh "${MVN} clean package"
             }
         }
         stage("build container"){
@@ -18,9 +20,11 @@ pipeline{
             }
         }
         stage("push container"){
-            withCredentials([string(credentialsId: 'dockercred', variable: 'dockerpwd')]) {
-                sh "docker login -u 98ashish -p ${dockerpwd}"
-                sh "docker push 98ashish/java-app:1.0"
+            steps{
+                withCredentials([string(credentialsId: 'dockercred', variable: 'dockerpwd')]) {
+                    sh "docker login -u 98ashish -p ${dockerpwd}"
+                    sh "docker push 98ashish/java-app:1.0"
+                }
             }
         }
         stage("deploy"){
