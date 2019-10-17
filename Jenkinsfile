@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-         MVN = tool (name: 'maven-3', type: 'maven') + '/bin/mvn'
+         MVN = tool (name: 'maven-3', type: 'maven')
     }
     stages{
         stage("checkout"){
@@ -11,7 +11,7 @@ pipeline{
         }
         stage("build mvn"){
             steps{
-                sh "${MVN} clean package"
+                sh "${MVN}/bin/mvn clean package"
             }
         }
         stage("build container"){
