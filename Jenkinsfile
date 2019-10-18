@@ -23,7 +23,7 @@ pipeline{
             steps{
                 withCredentials([string(credentialsId: 'dockercred', variable: 'dockerpwd')]) {
                     sh "docker login -u 98ashish -p ${dockerpwd}"
-                    sh "docker push 98ashish/java-app:1.0"
+                    sh "docker push 98ashish/java-app:${BUILD_NUMBER}"
                 }
             }
         }
